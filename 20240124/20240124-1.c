@@ -1,47 +1,40 @@
 //
-// Created by mrheltic on 04/07/2024.
+// Created by mrheltic on 04/07/24.
 //
 #include <stdio.h>
 
-// Procedura per comprimere un segnale
-void compress_signal(float* V, int L) {
-    // Chiedi all'utente di inserire un valore intero N che sia un divisore di L
+void compress_signal(float* V, int L){
     int N;
+
     do {
         printf("Inserisci un valore intero N che sia un divisore di %d: ", L);
         scanf("%d", &N);
-    } while (L % N != 0);
+    }
+    while(L % N != 0);
 
-    // Calcola la lunghezza del nuovo vettore
-    int new_length = L / N;
+    int new_lenght = L / N;
 
-    // Crea il nuovo vettore
-    float VC[new_length];
+    float VC[new_lenght];
 
-    // Comprimi il segnale
-    for (int i = 0; i < new_length; i++) {
+    for (int i = 0; i < new_lenght; i++){
         float sum = 0;
-        for (int j = 0; j < N; j++) {
+        for(int j = 0; j < N; j++){
             sum += V[i * N + j];
         }
-        VC[i] = sum / N;
+        VC[i] = sum/N;
     }
 
-    // Stampa il contenuto del nuovo vettore
     printf("Il vettore compresso e':\n");
-    for (int i = 0; i < new_length; i++) {
+    for(int i = 0; i < new_lenght; i++){
         printf("%.2f ", VC[i]);
     }
     printf("\n");
 }
 
-int main() {
-    // Crea un vettore di numeri reali
-    float V[] = {2.3, 2.6, 3.2, 2.5, 2.8, 2.2};
-    int L = sizeof(V) / sizeof(V[0]);
+int main(){
+    float V[] = {2.3 , 2.6 , 3.2 , 2.5 , 2.8 , 2.2};
+    int L = sizeof(V)/sizeof(V[0]);
 
-    // Comprimi il segnale
     compress_signal(V, L);
-
     return 0;
 }
